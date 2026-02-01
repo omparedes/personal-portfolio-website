@@ -23,10 +23,10 @@ const translations: Record<Language, Record<string, string>> = {
     // Hero
     "hero.greeting": "Hello, I'm",
     "hero.name": "Oscar Paredes",
-    "hero.role": "Junior Software Engineer & Data Scientist",
+    "hero.role": "Junior Systems Engineer & Data Scientist",
     "hero.separator": "|",
     "hero.specialization": "Full Stack & Applied AI",
-    "hero.description": "Junior Software Engineer with a strong focus on Data Science, Machine Learning, and applied AI systems. I build real-world solutions combining robust software engineering with data-driven intelligence.",
+    "hero.description": "Junior Systems Engineer with a strong focus on Data Science, Machine Learning, and applied AI systems. I build real-world solutions combining robust software engineering with data-driven intelligence.",
     "hero.cta.projects": "View Projects",
     "hero.cta.contact": "Get in Touch",
     "hero.stats.experience": "Years Experience",
@@ -35,10 +35,10 @@ const translations: Record<Language, Record<string, string>> = {
 
     // About
     "about.label": "About Me",
-    "about.title": " bridging Software Engineering and Data Science",
-    "about.p1": "I am a Junior Software Engineer with a strong focus on Data Science, Machine Learning, and applied AI systems.",
+    "about.title": "bridging Systems Engineering and Data Science",
+    "about.p1": "I am a Junior Systems Engineer with a strong focus on Data Science, Machine Learning, and applied AI systems.",
     "about.p2": "I work across frontend, backend, data engineering, and ML pipelines, with experience building real-world systems such as payment control platforms, computer vision solutions, workflow automation, and end-to-end data pipelines.",
-    "about.p3": "My background combines software development (Angular, Python, Java, SQL), data analysis, and applied machine learning, with an emphasis on practical, production-oriented solutions.",
+    "about.p3": "My background combines systems development (Angular, Python, Java, SQL), data analysis, and applied machine learning, with an emphasis on practical, production-oriented solutions.",
     "about.highlight1.title": "Full Stack Engineering",
     "about.highlight1.desc": "Building end-to-end applications with modern frontend frameworks (Angular) and robust backends (Python, Java).",
     "about.highlight2.title": "Data Science & ML",
@@ -72,7 +72,7 @@ const translations: Record<Language, Record<string, string>> = {
     // Contact
     "contact.label": "Contact",
     "contact.title": "Let's build something",
-    "contact.subtitle": "Open to junior roles in software engineering and data science.",
+    "contact.subtitle": "Open to junior roles in systems engineering and data science.",
     "contact.form.name": "Name",
     "contact.form.email": "Email",
     "contact.form.message": "Message",
@@ -99,10 +99,10 @@ const translations: Record<Language, Record<string, string>> = {
     // Hero
     "hero.greeting": "Hola, soy",
     "hero.name": "Oscar Paredes",
-    "hero.role": "Ingeniero de Software Junior y Científico de Datos",
+    "hero.role": "Ingeniero de Sistemas Junior y Científico de Datos",
     "hero.separator": "|",
     "hero.specialization": "Full Stack e IA Aplicada",
-    "hero.description": "Ingeniero de Software Junior con un fuerte enfoque en Ciencia de Datos, Aprendizaje Automático y sistemas de IA aplicada. Construyo soluciones del mundo real combinando ingeniería de software robusta con inteligencia basada en datos.",
+    "hero.description": "Ingeniero de Sistemas Junior con un fuerte enfoque en Ciencia de Datos, Aprendizaje Automático y sistemas de IA aplicada. Construyo soluciones del mundo real combinando ingeniería de software robusta con inteligencia basada en datos.",
     "hero.cta.projects": "Ver Proyectos",
     "hero.cta.contact": "Contactar",
     "hero.stats.experience": "Años de Experiencia",
@@ -111,8 +111,8 @@ const translations: Record<Language, Record<string, string>> = {
 
     // About
     "about.label": "Sobre Mí",
-    "about.title": "Uniendo Ingeniería de Software y Ciencia de Datos",
-    "about.p1": "Soy un Ingeniero de Software Junior con un fuerte enfoque en Ciencia de Datos, Aprendizaje Automático y sistemas de IA aplicada.",
+    "about.title": "Uniendo Ingeniería de Sistemas y Ciencia de Datos",
+    "about.p1": "Soy un Ingeniero de Sistemas Junior con un fuerte enfoque en Ciencia de Datos, Aprendizaje Automático y sistemas de IA aplicada.",
     "about.p2": "Trabajo en frontend, backend, ingeniería de datos y pipelines de ML, con experiencia construyendo sistemas del mundo real como plataformas de control de pagos, soluciones de visión computacional, automatización de flujos de trabajo y pipelines de datos de extremo a extremo.",
     "about.p3": "Mi perfil combina el desarrollo de software (Angular, Python, Java, SQL), análisis de datos y aprendizaje automático aplicado, con énfasis en soluciones prácticas orientadas a producción.",
     "about.highlight1.title": "Ingeniería Full Stack",
@@ -133,7 +133,7 @@ const translations: Record<Language, Record<string, string>> = {
     // Projects
     "projects.label": "Proyectos",
     "projects.title": "Trabajo Seleccionado",
-    "projects.subtitle": "Soluciones del mundo real en Software, Datos e IA.",
+    "projects.subtitle": "Soluciones del mundo real en Sistemas, Datos e IA.",
     "projects.featured": "Destacado",
     "projects.impact": "Impacto",
     "projects.viewMore": "Ver Todo en GitHub",
@@ -148,7 +148,7 @@ const translations: Record<Language, Record<string, string>> = {
     // Contact
     "contact.label": "Contacto",
     "contact.title": "Construyamos algo juntos",
-    "contact.subtitle": "Disponible para roles junior en ingeniería de software y ciencia de datos.",
+    "contact.subtitle": "Disponible para roles junior en ingeniería de sistemas y ciencia de datos.",
     "contact.form.name": "Nombre",
     "contact.form.email": "Correo",
     "contact.form.message": "Mensaje",
