@@ -50,10 +50,10 @@ export function ContactSection() {
                 <div>
                   <p className="text-xs text-muted-foreground">{t("contact.info.email")}</p>
                   <a
-                    href="mailto:contact@example.com"
+                    href="mailto:zedetsu@gmail.com"
                     className="text-sm text-foreground hover:text-primary transition-colors"
                   >
-                    contact@example.com
+                    zedetsu@gmail.com
                   </a>
                 </div>
               </div>
