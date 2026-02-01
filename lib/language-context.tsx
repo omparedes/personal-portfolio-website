@@ -22,7 +22,7 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Hero
     "hero.greeting": "Hello, I'm",
-    "hero.name": "Oscar Paredes Morales",
+    "hero.name": "Oscar Paredes",
     "hero.role": "Junior Software Engineer & Data Scientist",
     "hero.separator": "|",
     "hero.specialization": "Full Stack & Applied AI",
@@ -98,7 +98,7 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Hero
     "hero.greeting": "Hola, soy",
-    "hero.name": "Oscar Paredes Morales",
+    "hero.name": "Oscar Paredes",
     "hero.role": "Ingeniero de Software Junior y Científico de Datos",
     "hero.separator": "|",
     "hero.specialization": "Full Stack e IA Aplicada",
