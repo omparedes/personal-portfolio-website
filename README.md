@@ -41,7 +41,7 @@ Para una integración futura con Formspree Free, verificar el formulario y su de
 
 Vercel publica desde `main` en [portafolio-plum-xi-81.vercel.app](https://portafolio-plum-xi-81.vercel.app). La indexación requiere las variables de sistema de Vercel activas y el entorno de destino Production. El desarrollo local y los previews mantienen `noindex` y bloquean el rastreo en `robots.txt`.
 
-Después del despliegue, ejecutar la auditoría HTTP con la compilación local de la misma revisión.
+Después del despliegue, ejecutar la auditoría HTTP con la compilación local de la misma revisión. La comprobación pública solo hace lecturas. Las pruebas POST de rutas retiradas se ejecutan en localhost.
 
 ```sh
 node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/check-portfolio-production.ts https://portafolio-plum-xi-81.vercel.app --indexable

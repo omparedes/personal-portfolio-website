@@ -8,8 +8,9 @@ const target = process.argv.slice(2).find(argument => !argument.startsWith("--")
 const base = new URL(target ?? "http://127.0.0.1:3218")
 const publicOrigin = "https://portafolio-plum-xi-81.vercel.app"
 const indexable = process.argv.includes("--indexable")
+const localTarget = ["127.0.0.1", "localhost", "[::1]"].includes(base.hostname)
 assert(
-  ["127.0.0.1", "localhost", "[::1]"].includes(base.hostname) || (indexable && base.origin === publicOrigin),
+  localTarget || (indexable && base.origin === publicOrigin),
   "Use a local server or the approved production domain",
 )
 const locales = ["es", "en"] as const
@@ -62,7 +63,7 @@ async function verify() {
   for (const filename of manifests) {
     const manifest = await readFile(path.join(buildPath, filename), "utf8")
     scan(manifest, filename)
-    assert(!manifest.includes("/contact/send"))
+    assert(!manifest.includes("/contact/send") && !manifest.includes("/api/contact"))
   }
   const builds = (await files(path.join(buildPath, "static"))).filter(filename => /\.(?:js|css|json|map|html|rsc|txt)$/.test(filename))
   assert(builds.length > 0, "No build assets to audit")
@@ -139,8 +140,11 @@ async function verify() {
     "/projects/unknown", "/profile-photo2.jpg", "/icon-light-32x32.png", "/icon-dark-32x32.png"]) {
     assert.equal((await fetch(new URL(route, base))).status, 404, route)
   }
-  for (const route of ["/contact/send", "/design-preview/contact/send"]) {
-    assert.equal((await fetch(new URL(route, base), { method: "POST" })).status, 404, route)
+  for (const route of ["/contact/send", "/design-preview/contact/send", "/api/contact"]) {
+    assert.equal((await fetch(new URL(route, base))).status, 404, route)
+    if (localTarget) {
+      assert.equal((await fetch(new URL(route, base), { method: "POST", redirect: "error" })).status, 404, route)
+    }
   }
   for (const language of locales) {
     const response = await fetch(new URL(`/cv-review/${language}`, base))
