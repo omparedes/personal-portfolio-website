@@ -1,6 +1,7 @@
 import Image from "next/image"
 import { ArrowUpRight, BookOpen, Code2, Github, GraduationCap, Mail } from "lucide-react"
 import { contactEmailLink, githubProfile } from "@/lib/public-links"
+import type { ResumeLanguage } from "@/lib/resume-review"
 import { portfolioContent, type PortfolioProject } from "../_content"
 import { labels } from "../_labels"
 import { aboutPath, portfolioHref, projectsPath, type Preferences } from "../_routes"
@@ -29,17 +30,20 @@ function groupSkills(projects: PortfolioProject[]) {
   }).filter(group => group.technologies.length > 0)
 }
 
-export function About({ preferences }: { preferences: Preferences }) {
+export function About({ preferences, resumeDocuments }: {
+  preferences: Preferences
+  resumeDocuments: readonly ResumeLanguage[]
+}) {
   const { locale } = preferences
   const t = aboutLabels[locale]
   const shared = labels[locale]
-  const { name, objective, overview, projects, events, education, credentials } = portfolioContent(locale)
+  const { name, objective, overview, biography, projects, events, education, credentials } = portfolioContent(locale)
   const skills = groupSkills(projects)
   const issuers = [...new Set(credentials.map(credential => credential.issuer))]
   const date = new Intl.DateTimeFormat(locale, { dateStyle: "long", timeZone: "UTC" })
   const sections = [
     ["career", t.history, events.length], ["skills", t.skills, skills.length], ["education", t.academic, education.length],
-    ["credentials", t.certificates, credentials.length], ["resume", t.resume, true], ["contact", t.contact, true],
+    ["credentials", t.certificates, credentials.length], ["resume", t.resume, resumeDocuments.length], ["contact", t.contact, true],
   ] as const
 
   return <PortfolioShell preferences={preferences} name={name} path={aboutPath}>
@@ -48,8 +52,9 @@ export function About({ preferences }: { preferences: Preferences }) {
         <div className={s.intro}>
           <p className={s.kicker}>{shared.about}</p>
           <h1>{name}</h1>
-          {objective && <p className={s.role}>{t.specialty}</p>}
+          {objective && <p className={s.role}>{objective}</p>}
           {overview && <p>{overview}</p>}
+          {biography && <p className={s.biography}>{biography}</p>}
           <div className={s.heroLinks}>
             <a href={portfolioHref(projectsPath, preferences)}>{shared.explore}</a>
             <a href={contactEmailLink}>{t.email}</a>
@@ -109,7 +114,7 @@ export function About({ preferences }: { preferences: Preferences }) {
         </section>)}</div>
       </section>}
       <div className={s.closing}>
-        <ResumePanel locale={locale}/>
+        {resumeDocuments.length > 0 && <ResumePanel locale={locale} documents={resumeDocuments}/>}
         <section id="contact" className={s.panel} aria-labelledby="contact-title">
           <Mail size={22} aria-hidden="true"/><h2 id="contact-title">{t.contact}</h2>
           <div className={s.panelActions}>

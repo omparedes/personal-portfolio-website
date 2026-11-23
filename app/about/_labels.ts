@@ -1,6 +1,6 @@
 export const aboutLabels = {
   es: {
-    specialty: "Desarrollo full-stack y backend", portrait: "Retrato de",
+    portrait: "Retrato de",
     history: "Mi trayectoria",
     historyIntro: "Mi trabajo reúne desarrollo de software, aplicaciones empresariales e investigación aplicada. La formación universitaria y los proyectos recientes pueden coincidir en el tiempo.",
     skills: "Competencias técnicas",
@@ -10,11 +10,12 @@ export const aboutLabels = {
     academic: "Formación universitaria", learning: "Formación complementaria",
     student: "En curso", graduate: "Estudios concluidos", "degree-holder": "Título obtenido",
     certificates: "Certificados de cursos", completed: "Finalización", verify: "Verificar certificado",
-    index: "En esta página", resume: "Currículum", resumePending: "Las versiones ES y EN están pendientes de aprobación.",
-    view: "Ver PDF", download: "Descargar PDF", contact: "Contacto profesional", email: "Escribir por correo",
+    index: "En esta página", resume: "Currículum",
+    view: "Ver PDF en", download: "Descargar PDF en", resumeLanguages: { es: "español", en: "inglés" },
+    contact: "Contacto profesional", email: "Escribir por correo",
   },
   en: {
-    specialty: "Full-stack and backend development", portrait: "Portrait of",
+    portrait: "Portrait of",
     history: "My background",
     historyIntro: "My work spans software development, business applications, and applied research. University studies and recent projects may overlap.",
     skills: "Technical skills",
@@ -24,7 +25,8 @@ export const aboutLabels = {
     academic: "University studies", learning: "Continuing education",
     student: "In progress", graduate: "Studies completed", "degree-holder": "Degree awarded",
     certificates: "Course certificates", completed: "Completed", verify: "Verify certificate",
-    index: "On this page", resume: "Résumé", resumePending: "The ES and EN versions are awaiting approval.",
-    view: "View PDF", download: "Download PDF", contact: "Professional contact", email: "Send an email",
+    index: "On this page", resume: "Résumé",
+    view: "View PDF in", download: "Download PDF in", resumeLanguages: { es: "Spanish", en: "English" },
+    contact: "Professional contact", email: "Send an email",
   },
 }

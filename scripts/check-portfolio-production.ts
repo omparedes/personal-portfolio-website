@@ -96,6 +96,7 @@ async function verify() {
       assert(!html.includes("<form"))
       assert(html.includes("mailto:") && html.includes("https://github.com/omparedes"))
     }
+    assert(!html.includes('href="/cv-review/'), "Local résumé links must stay out of the public configuration")
     assert(!/href="[^"]+\.pdf(?:[?"#]|$)/i.test(html))
     const stream = await fetch(url, { headers: { RSC: "1" } })
     assert.equal(stream.status, 200)
@@ -109,6 +110,10 @@ async function verify() {
   }
   for (const route of ["/contact/send", "/design-preview/contact/send"]) {
     assert.equal((await fetch(new URL(route, base), { method: "POST" })).status, 404, route)
+  }
+  for (const language of locales) {
+    const response = await fetch(new URL(`/cv-review/${language}`, base))
+    assert.equal(response.status, 404, "Local résumés must be unavailable in the public configuration")
   }
   const missing = await fetch(new URL("/projects/unknown?lang=en&theme=light", base))
   assert.equal(missing.status, 404)

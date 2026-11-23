@@ -15,6 +15,7 @@
 .intro h1 { margin: .85rem 0 1rem; font-size: clamp(2.7rem, 5.7vw, 6.2rem); line-height: .98; letter-spacing: -.078em; }
 .intro p:not(.kicker) { max-width: 36rem; line-height: 1.5; color: var(--muted); }
 .intro p.role { margin-bottom: .85rem; font-size: clamp(1.15rem, 2.35vw, 2rem); font-weight: 560; color: var(--accent); }
+.biography { margin-top: .8rem; }
 .portrait {
   position: relative;
   justify-self: center;
@@ -105,6 +106,9 @@
 .closing { grid-template-columns: repeat(2, minmax(0, 1fr)); padding-top: clamp(2.3rem, 5vw, 4.35rem); }
 .closing h2 { margin-block: .45rem; }
 .closing .panelActions { margin-top: .2rem; }
+.closing:has(> :only-child) { grid-template-columns: minmax(0, 1fr); }
+.resumeList li { border-top: var(--edge); padding-block: .7rem .2rem; }
+.resumeList h3 small { font: inherit; font-weight: 400; }
 @media (max-width: 57rem) {
   .skillGrid, .credentialGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }

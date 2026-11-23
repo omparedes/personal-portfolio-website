@@ -17,8 +17,8 @@ export const projection = {
         "profileId": "profile.oscar-paredes"
       },
       "text": {
-        "es": "Orientado al desarrollo full-stack y backend.",
-        "en": "Focused on full-stack and backend development."
+        "es": "Desarrollador Full-Stack y Backend",
+        "en": "Full-Stack and Backend Developer"
       }
     },
     {
@@ -29,8 +29,20 @@ export const projection = {
         "basis": "owner-statement"
       },
       "text": {
-        "es": "Experiencia en proyectos de desarrollo de software, bases de datos e inteligencia artificial aplicada.",
-        "en": "Experience in projects involving software development, databases, and applied artificial intelligence."
+        "es": "Desarrollo aplicaciones empresariales a partir del análisis de requerimientos. Trabajo con Angular, TypeScript, PostgreSQL y Supabase en lógica de negocio y operaciones transaccionales.",
+        "en": "I build business applications from requirements and use Angular, TypeScript, PostgreSQL, and Supabase to implement business logic and transactional workflows."
+      }
+    },
+    {
+      "id": "experience.professional-background",
+      "data": {
+        "kind": "experience-overview",
+        "profileId": "profile.oscar-paredes",
+        "basis": "owner-statement"
+      },
+      "text": {
+        "es": "Mi trayectoria en gestión comercial y operaciones desde 2011 me ayuda a entender los procesos que los sistemas empresariales deben resolver. Curso los últimos ciclos de Ingeniería de Sistemas en la UPC y me interesa aplicar la inteligencia artificial y la visión computacional.",
+        "en": "My background in business operations and customer management since 2011 helps me understand the workflows that business software needs to support. I am in the final semesters of Systems Engineering at UPC and am interested in applied AI and computer vision."
       }
     },
     {

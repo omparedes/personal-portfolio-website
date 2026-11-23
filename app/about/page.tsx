@@ -1,4 +1,6 @@
+import { headers } from "next/headers"
 import { githubProfile } from "@/lib/public-links"
+import { availableReviewResumes } from "@/lib/resume-review"
 import { portfolioContent } from "../_content"
 import { labels } from "../_labels"
 import { aboutPath, preferences } from "../_routes"
@@ -7,13 +9,14 @@ import { About } from "./_about"
 
 export async function generateMetadata({ searchParams }: PageProps<"/about">) {
   const { locale } = preferences(await searchParams)
-  const { objective } = portfolioContent(locale)
-  return pageMetadata(aboutPath, locale, labels[locale].about, objective)
+  const { objective, overview } = portfolioContent(locale)
+  return pageMetadata(aboutPath, locale, labels[locale].about, overview ?? objective)
 }
 
 export default async function AboutPage({ searchParams }: PageProps<"/about">) {
   const selected = preferences(await searchParams)
-  const { name } = portfolioContent(selected.locale)
+  const { name, objective, overview } = portfolioContent(selected.locale)
+  const resumeDocuments = await availableReviewResumes((await headers()).get("host"))
   const profile = {
     "@context": "https://schema.org",
     "@type": "ProfilePage",
@@ -22,6 +25,8 @@ export default async function AboutPage({ searchParams }: PageProps<"/about">) {
     mainEntity: {
       "@type": "Person",
       name,
+      jobTitle: objective,
+      description: overview,
       sameAs: [githubProfile],
       image: new URL("/profile-photo.jpg", siteOrigin).href,
     },
@@ -30,6 +35,6 @@ export default async function AboutPage({ searchParams }: PageProps<"/about">) {
     {name && <script type="application/ld+json" dangerouslySetInnerHTML={{
       __html: JSON.stringify(profile).replace(/</g, "\u003c"),
     }}/>}
-    <About preferences={selected}/>
+    <About preferences={selected} resumeDocuments={resumeDocuments}/>
   </>
 }

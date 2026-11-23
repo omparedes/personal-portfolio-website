@@ -66,6 +66,7 @@ export function portfolioContent(locale: Locale) {
   return {
     name: identity?.kind === "profile" ? identity.name : "",
     objective: byId.get("objective.software-development")?.text,
+    biography: byId.get("experience.professional-background")?.text,
     overview: byId.get("experience.project-areas")?.text, projects, events, education, credentials,
   }
 }
