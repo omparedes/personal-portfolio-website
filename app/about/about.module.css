@@ -1,0 +1,122 @@
+.about { padding-block: var(--section-gap, clamp(2rem, 5vw, 4.5rem)); }
+.hero, .story {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, .7fr);
+  align-items: center;
+  gap: clamp(2rem, 6vw, 7rem);
+}
+.hero { padding-bottom: clamp(2.1rem, 6vw, 5rem); }
+.kicker {
+  color: var(--accent);
+  font: 600 .79rem/1.4 var(--mono);
+  letter-spacing: .11em;
+  text-transform: uppercase;
+}
+.intro h1 { margin: .85rem 0 1rem; font-size: clamp(2.7rem, 5.7vw, 6.2rem); line-height: .98; letter-spacing: -.078em; }
+.intro p:not(.kicker) { max-width: 36rem; line-height: 1.5; color: var(--muted); }
+.intro p.role { margin-bottom: .85rem; font-size: clamp(1.15rem, 2.35vw, 2rem); font-weight: 560; color: var(--accent); }
+.biography { margin-top: .8rem; }
+.portrait {
+  position: relative;
+  justify-self: center;
+  max-width: 26rem;
+  width: 100%;
+  padding: clamp(.55rem, 1.4vw, 1.05rem);
+  border: var(--edge);
+  border-radius: 1.15rem;
+  background: var(--wash);
+}
+.portrait img { display: block; border-radius: .65rem; height: auto; width: 100%; }
+.heroLinks, .panelActions { display: flex; flex-wrap: wrap; align-items: center; gap: .3rem 1rem; margin-top: 1.1rem; }
+.heroLinks a, .panelActions a {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  min-height: 44px;
+  color: var(--accent);
+  font-weight: 610;
+  text-decoration: underline;
+  text-underline-offset: .22em;
+}
+.heroLinks a:first-child {
+  color: var(--button-ink);
+  background: var(--button);
+  border-radius: .5rem;
+  padding: .55rem .9rem;
+  text-decoration: none;
+}
+.index {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .15rem 1.25rem;
+  padding-block: .55rem;
+  border-block: var(--edge);
+}
+.index a { display: inline-flex; align-items: center; min-height: 44px; color: var(--muted); font-size: .93rem; }
+.index a:hover, .heroLinks a:not(:first-child):hover, .panelActions a:hover { text-decoration: underline; color: var(--ink); }
+.story, .section { padding-block: clamp(2.3rem, 5vw, 4.35rem); border-bottom: var(--edge); scroll-margin-top: 1rem; }
+.story { grid-template-columns: minmax(12rem, .52fr) minmax(0, 1fr); align-items: start; }
+.sectionIntro { display: grid; gap: .6rem; margin-bottom: 1.15rem; }
+.sectionIntro h2, .closing h2 { font-size: clamp(1.65rem, 3vw, 2.65rem); letter-spacing: -.045em; }
+.sectionIntro svg, .closing svg { color: var(--accent); }
+.sectionIntro p, .education p, .panel p { max-width: 58ch; color: var(--muted); line-height: 1.55; }
+.sectionIntro .kicker { color: var(--accent); }
+.skillGrid, .credentialGrid, .closing { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+.about .credentialGrid { grid-template-columns: minmax(0, 1fr); gap: 0; }
+.issuer { border-top: var(--edge); padding-block: 1rem; }
+.issuer h3 { margin-bottom: .65rem; font-weight: 650; }
+.issuer ul { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); gap: .75rem 1.4rem; }
+.issuer li { padding-inline-start: .85rem; border-inline-start: 2px solid var(--rule); }
+.issuer li p { color: var(--muted); line-height: 1.45; }
+.issuer a { min-block-size: 24px; }
+@media (pointer: coarse) {
+  .issuer a { min-block-size: 44px; align-items: center; }
+}
+.panel {
+  min-width: 0;
+  border: var(--edge);
+  border-radius: .8rem;
+  background: var(--surface);
+  padding: clamp(1rem, 2vw, 1.45rem);
+}
+.panel h3 { font-size: 1.1rem; font-weight: 650; line-height: 1.32; }
+.panel dl > div { border-top: var(--edge); margin-top: .65rem; padding-top: .65rem; }
+.panel dt { color: var(--ink); font: 600 .89rem/1.55 var(--mono); }
+.panel dd { display: flex; flex-wrap: wrap; gap: 0 .8rem; }
+.panel dd a { min-height: 40px; display: inline-flex; align-items: center; gap: .3rem; font-size: .91rem; color: var(--accent); }
+.panel dd a:hover, .credentialGrid a:hover { text-decoration: underline; text-underline-offset: .2em; }
+.panel small { color: var(--muted); }
+.education {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 1.25rem;
+  border: var(--edge);
+  background: var(--surface);
+  border-radius: .8rem;
+  padding: clamp(1rem, 2vw, 1.6rem);
+}
+.education + .education { margin-top: 1rem; }
+.education > .kicker { padding: .65rem .8rem; border-radius: .42rem; background: var(--wash); }
+.education h3 { font-size: clamp(1.08rem, 2vw, 1.4rem); font-weight: 650; }
+.education strong { color: var(--accent); }
+.credentialGrid a { display: flex; align-items: flex-start; gap: .45rem; color: var(--accent); font-weight: 600; }
+.credentialGrid a svg { flex: none; margin-top: .16rem; }
+.credentialGrid li p { font-size: .87rem; margin-top: .2rem; }
+.closing { grid-template-columns: repeat(2, minmax(0, 1fr)); padding-top: clamp(2.3rem, 5vw, 4.35rem); }
+.closing h2 { margin-block: .45rem; }
+.closing .panelActions { margin-top: .2rem; }
+.closing:has(> :only-child) { grid-template-columns: minmax(0, 1fr); }
+.resumeList li { border-top: var(--edge); padding-block: .7rem .2rem; }
+.resumeList h3 small { font: inherit; font-weight: 400; }
+@media (max-width: 57rem) {
+  .skillGrid, .credentialGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 43rem) {
+  .hero, .story, .skillGrid, .credentialGrid, .closing { grid-template-columns: minmax(0, 1fr); }
+  .hero { gap: 1.5rem; }
+  .portrait { justify-self: start; max-width: 21rem; }
+  .story { gap: .6rem; }
+  .education { grid-template-columns: minmax(0, 1fr); gap: .75rem; }
+  .education > .kicker { justify-self: start; }
+}

@@ -1,0 +1,28 @@
+export const contactLabels = {
+  es: {
+    title: "Empleo, proyectos y colaboraciones",
+    intro: "¿Tienes una vacante, un proyecto de software o una idea para colaborar? Escríbeme y cuéntame qué tienes en mente.",
+    direct: "Correo directo",
+    emailHint: "El enlace abre tu aplicación de correo con el asunto preparado.",
+    copy: "Copiar dirección de correo",
+    copied: "Dirección copiada.",
+    copyFailed: "No se pudo copiar. Selecciona la dirección para copiarla manualmente.",
+    profiles: "Perfil profesional",
+    privacy: "Privacidad del contacto",
+    privacyUse: "Usaré tu correo y el contenido que decidas enviar para atender y responder tu consulta. Evita incluir información sensible.",
+    privacyRetention: "El contacto se realiza por correo. El sitio no recibe ni guarda una copia de tu mensaje.",
+  },
+  en: {
+    title: "Jobs, projects and collaborations",
+    intro: "Whether you have a job opening, a software project or an idea for a collaboration, email me and tell me what you have in mind.",
+    direct: "Direct email",
+    emailHint: "The link opens your email app with the subject filled in.",
+    copy: "Copy email address",
+    copied: "Email address copied.",
+    copyFailed: "Couldn't copy the address. Select it to copy it manually.",
+    profiles: "Professional profile",
+    privacy: "Contact privacy",
+    privacyUse: "I'll use your email and the information you choose to send to reply to your inquiry. Please avoid sharing sensitive information.",
+    privacyRetention: "Contact takes place by email. The site does not receive or store a copy of your message.",
+  },
+}
