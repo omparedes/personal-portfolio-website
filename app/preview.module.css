@@ -50,8 +50,8 @@
 .headerInner { display: flex; align-items: center; min-height: 4.6rem; gap: var(--gap); }
 .brand, .controls, .controls a, .nav, .byline, .heroActions, .heroActions a, .eyebrow, .production, .cardActions, .cardActions a, .sectionHeading, .caption, .plateLabel { display: flex; align-items: center; }
 .brand { gap: .7rem; font-size: 1.13rem; font-weight: 680; letter-spacing: -.045em; white-space: nowrap; }
-.brandIcon, .sectionIcon, .marker { display: inline-grid; place-items: center; }
-.brandIcon { width: 2.2rem; height: 2.2rem; border-radius: .58rem; color: var(--button-ink); background: var(--button); }
+.sectionIcon, .marker { display: inline-grid; place-items: center; }
+.brandIcon { display: block; width: 2.2rem; height: 2.2rem; flex: none; }
 .nav { margin-left: auto; gap: clamp(1rem, 2.5vw, 2.6rem); }
 .nav a, .controls a, .cardActions a { min-height: 44px; align-content: center; }
 .nav a, .controls a { color: var(--muted); font-size: .9rem; font-weight: 550; }

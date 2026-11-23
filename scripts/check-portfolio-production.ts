@@ -30,12 +30,22 @@ async function hashes(filenames: string[]) {
 }
 
 const activeRoutes = ["/", "/projects", "/projects/sigcoop", "/projects/smartparking", "/about", "/contact"]
-const approvedAssets = [
-  "apple-icon.png", "icon-dark-32x32.png", "icon-light-32x32.png", "icon.svg",
-  "profile-photo.jpg",
-]
+const approvedAssets = ["brand/op-claro.svg", "brand/op-oscuro.svg", "profile-photo.jpg"]
+const expectedIcons = {
+  "/apple-icon.png": { rel: "apple-touch-icon", type: /^image\/png/ },
+  "/favicon.ico": { rel: "icon", type: /^image\/(?:x-icon|vnd\.microsoft\.icon)/ },
+  "/icon.svg": { rel: "icon", type: /^image\/svg\+xml/ },
+}
+
+function findIconLinks(html: string) {
+  return (html.match(/<link\b[^>]*>/g) ?? []).flatMap(tag => {
+    const rel = tag.match(/\brel="(icon|apple-touch-icon)"/)?.[1]
+    const href = tag.match(/\bhref="([^"]+)"/)?.[1]
+    return rel && href ? [{ rel, url: new URL(href, base) }] : []
+  })
+}
 async function verify() {
-  assert.deepEqual((await files("public")).map(filename => path.relative("public", filename)).sort(), approvedAssets.sort())
+  assert.deepEqual((await files("public")).map(filename => path.relative("public", filename).split(path.sep).join("/")).sort(), approvedAssets.sort())
   const buildPath = ".next"
   const media = await files(path.join(buildPath, "static", "media"))
   const approvedMedia = [...await files("app/_assets"), ...(await files("app/fonts")).filter(name => name.endsWith(".woff2"))]
@@ -53,6 +63,7 @@ async function verify() {
     if (/\.(?:html|rsc|json|meta|body)$/.test(filename)) scan(await readFile(filename, "utf8"), filename)
   }
 
+  const checkedIcons = new Set<string>()
   for (const route of activeRoutes) for (const lang of locales) {
     const url = new URL(route, base)
     url.searchParams.set("lang", lang)
@@ -68,6 +79,19 @@ async function verify() {
     const canonical = html.match(/<link\b(?=[^>]*\brel="canonical")[^>]*>/)?.[0].match(/\bhref="([^"]+)"/)?.[1]
     assert(canonical, String(url))
     assert.equal(new URL(canonical).href, expectedCanonical, String(url))
+    const iconLinks = findIconLinks(html)
+    assert.deepEqual(iconLinks.map(({ url }) => url.pathname).sort(), Object.keys(expectedIcons).sort())
+    for (const { rel, url: iconUrl } of iconLinks) {
+      assert.equal(iconUrl.origin, base.origin)
+      const icon = expectedIcons[iconUrl.pathname as keyof typeof expectedIcons]
+      assert.equal(rel, icon.rel)
+      if (checkedIcons.has(iconUrl.href)) continue
+      const response = await fetch(iconUrl)
+      assert.equal(response.status, 200)
+      assert.match(response.headers.get("content-type") ?? "", icon.type)
+      assert.deepEqual(Buffer.from(await response.arrayBuffer()), await readFile(path.join("app", iconUrl.pathname.slice(1))))
+      checkedIcons.add(iconUrl.href)
+    }
     if (route === "/contact") {
       assert(!html.includes("<form"))
       assert(html.includes("mailto:") && html.includes("https://github.com/omparedes"))
@@ -80,7 +104,7 @@ async function verify() {
   }
 
   for (const route of ["/design-preview", ...activeRoutes.slice(1).map(route => "/design-preview" + route),
-    "/projects/unknown", "/profile-photo2.jpg"]) {
+    "/projects/unknown", "/profile-photo2.jpg", "/icon-light-32x32.png", "/icon-dark-32x32.png"]) {
     assert.equal((await fetch(new URL(route, base))).status, 404, route)
   }
   for (const route of ["/contact/send", "/design-preview/contact/send"]) {

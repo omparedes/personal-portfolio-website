@@ -1,5 +1,6 @@
 import type { ReactNode } from "react"
-import { Globe2, Layers3, Moon, Sun } from "lucide-react"
+import Image from "next/image"
+import { Globe2, Moon, Sun } from "lucide-react"
 import { labels } from "./_labels"
 import { aboutPath, contactPath, homePath, portfolioHref, projectsPath, type Preferences } from "./_routes"
 import s from "./preview.module.css"
@@ -27,7 +28,9 @@ export function PortfolioShell({ preferences, name, path, query, catalogQuery, c
     <header className={s.header}>
       <div className={s.headerInner}>
         <a className={s.brand} href={home} aria-current={path === homePath ? "page" : undefined} aria-label={`${signature} · ${t.start}`}>
-          <span className={s.brandIcon}><Layers3 size={23} strokeWidth={2.4}/></span>{signature}
+          <Image className={s.brandIcon} src={theme === "light" ? "/brand/op-claro.svg" : "/brand/op-oscuro.svg"}
+            width={35} height={35} alt="" unoptimized/>
+          {signature}
         </a>
         <nav className={s.nav} aria-label={t.nav}>
           <a href={portfolioHref(projectsPath, preferences, catalogQuery)} aria-current={path === projectsPath ? "page" : path.startsWith(`${projectsPath}/`) ? "location" : undefined}>{t.projects}</a>
