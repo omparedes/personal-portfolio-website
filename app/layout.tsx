@@ -1,16 +1,25 @@
 import React from "react"
 import type { Metadata } from 'next'
-import { Inter, JetBrains_Mono } from 'next/font/google'
-import { Analytics } from '@vercel/analytics/next'
+import localFont from 'next/font/local'
+import { headers } from "next/headers"
+import { localeHeader, portfolioLocale } from "./_routes"
+import { siteOrigin } from "./_seo"
 import './globals.css'
 
-const _inter = Inter({ subsets: ["latin"] });
-const _jetbrainsMono = JetBrains_Mono({ subsets: ["latin"] });
+const inter = localFont({
+  src: "./fonts/inter-latin.woff2",
+  weight: "100 900",
+  variable: "--font-inter",
+})
+const jetBrainsMono = localFont({
+  src: "./fonts/jetbrains-mono-latin.woff2",
+  weight: "100 800",
+  variable: "--font-jetbrains-mono",
+})
 
 export const metadata: Metadata = {
-  title: 'Oscar Paredes | Junior Software Engineer & Data Scientist',
-  description: 'Junior Software Engineer & Data Scientist specializing in Applied AI, Machine Learning, and Full Stack Development. Building real-world solutions with Python, Angular, and Data Engineering.',
-  generator: 'v0.app',
+  metadataBase: siteOrigin,
+  robots: { index: false, follow: false },
   icons: {
     icon: [
       {
@@ -30,16 +39,16 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const locale = portfolioLocale((await headers()).get(localeHeader))
   return (
-    <html lang="en">
-      <body className={`font-sans antialiased`}>
+    <html lang={locale}>
+      <body className={`${inter.variable} ${jetBrainsMono.variable} font-sans antialiased`}>
         {children}
-        <Analytics />
       </body>
     </html>
   )

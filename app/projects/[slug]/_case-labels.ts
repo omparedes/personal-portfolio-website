@@ -1,0 +1,28 @@
+export const caseLabels = {
+  es: {
+    context: "Contexto y problema", participation: "Participación", architecture: "Arquitectura",
+    feature: "Funcionalidades", decision: "Decisiones técnicas", challenge: "Desafíos",
+    quality: "Pruebas y calidad", result: "Resultados documentados", limitation: "Alcance y límites",
+    evidence: "Fuentes técnicas", contents: "En este caso", flow: "Flujo de arquitectura documentado",
+    gallery: "Galería de la demo", inventory: "Capturas originales de la demo pública con datos sintéticos.",
+    enlarge: "Ampliar", close: "Cerrar", prev: "Anterior", next: "Siguiente", image: "Imagen",
+    fullImage: "Abrir imagen original", payments: "Registro de pagos",
+    paymentsAlt: "Asistente de pagos de la demo con tres pasos y una cuenta ficticia seleccionada.",
+    paymentsCaption: "El asistente organiza la búsqueda del pagador, la distribución del importe y la confirmación.",
+    dashboardCaption: "El dashboard reúne un resumen de recaudación, deuda y movimientos de la demo.",
+    reportCaption: "El reporte muestra filtros y distingue dinero nuevo, saldo aplicado y total por conceptos.",
+  },
+  en: {
+    context: "Context and problem", participation: "Contribution", architecture: "Architecture",
+    feature: "Features", decision: "Technical decisions", challenge: "Engineering challenges",
+    quality: "Testing and quality", result: "Documented results", limitation: "Scope and limitations",
+    evidence: "Technical sources", contents: "In this case study", flow: "Documented architecture flow",
+    gallery: "Demo gallery", inventory: "Original screenshots from the public demo with synthetic data.",
+    enlarge: "Enlarge", close: "Close", prev: "Previous", next: "Next", image: "Image",
+    fullImage: "Open original image", payments: "Payment recording",
+    paymentsAlt: "Three-step demo payment wizard with a fictional account selected.",
+    paymentsCaption: "The wizard guides payer lookup, amount allocation, and confirmation.",
+    dashboardCaption: "The dashboard summarizes collections, outstanding debt, and activity in the demo.",
+    reportCaption: "The report shows filters and distinguishes new inflows, applied credit, and totals by category.",
+  },
+}
