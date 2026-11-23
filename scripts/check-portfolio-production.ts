@@ -2,9 +2,16 @@ import assert from "node:assert/strict"
 import { createHash } from "node:crypto"
 import { readFile, readdir } from "node:fs/promises"
 import path from "node:path"
+import { contactEmailLink, requestResumeLink } from "../lib/public-links.ts"
 
-const base = new URL(process.argv[2] ?? "http://127.0.0.1:3218")
-assert(["127.0.0.1", "localhost", "[::1]"].includes(base.hostname), "Use a local production server")
+const target = process.argv.slice(2).find(argument => !argument.startsWith("--"))
+const base = new URL(target ?? "http://127.0.0.1:3218")
+const publicOrigin = "https://portafolio-plum-xi-81.vercel.app"
+const indexable = process.argv.includes("--indexable")
+assert(
+  ["127.0.0.1", "localhost", "[::1]"].includes(base.hostname) || (indexable && base.origin === publicOrigin),
+  "Use a local server or the approved production domain",
+)
 const locales = ["es", "en"] as const
 const blocked = ["/design-preview", "challenges.cloudflare.com", "api.resend.com"]
 const secretPattern = /-----BEGIN [A-Z ]*PRIVATE KEY-----|\b(?:ghp_[A-Za-z0-9]{30,}|re_[A-Za-z0-9]{24,})\b/
@@ -60,8 +67,8 @@ async function verify() {
   const builds = (await files(path.join(buildPath, "static"))).filter(filename => /\.(?:js|css|json|map|html|rsc|txt)$/.test(filename))
   assert(builds.length > 0, "No build assets to audit")
   for (const filename of builds) scan(await readFile(filename, "utf8"), filename)
-  for (const filename of await files(path.join(buildPath, "server", "app"))) {
-    if (/\.(?:html|rsc|json|meta|body)$/.test(filename)) scan(await readFile(filename, "utf8"), filename)
+  for (const filename of await files(path.join(buildPath, "server"))) {
+    if (/\.(?:js|html|rsc|json|meta|body)$/.test(filename)) scan(await readFile(filename, "utf8"), filename)
   }
 
   const checkedIcons = new Set<string>()
@@ -73,13 +80,28 @@ async function verify() {
     const html = await response.text()
     scan(html, url.pathname)
     assert(html.includes(`<html lang="${lang}"`), String(url))
-    assert(/name="robots" content="noindex, nofollow"/.test(html))
+    assert(html.includes(indexable ? 'name="robots" content="index, follow"' : 'name="robots" content="noindex, nofollow"'))
+    if (indexable) assert(!/noindex/i.test(response.headers.get("x-robots-tag") ?? ""))
     assert.match(html, /<title>[^<]+<\/title>/)
+    assert.match(html, /name="description" content="[^"]+"/)
+    assert.match(html, /property="og:title" content="[^"]+"/)
     assert.match(html, /property="og:description" content="[^"]+"/)
-    const expectedCanonical = `https://portafolio-plum-xi-81.vercel.app${route}${lang === "en" ? "?lang=en" : ""}`
+    assert(html.includes(`property="og:locale" content="${lang === "en" ? "en_US" : "es_PE"}"`))
+    assert(html.includes(`property="og:image" content="${publicOrigin}/profile-photo.jpg"`))
+    const spanish = publicOrigin + route
+    const english = spanish + "?lang=en"
+    const expectedCanonical = lang === "en" ? english : spanish
     const canonical = html.match(/<link\b(?=[^>]*\brel="canonical")[^>]*>/)?.[0].match(/\bhref="([^"]+)"/)?.[1]
     assert(canonical, String(url))
     assert.equal(new URL(canonical).href, expectedCanonical, String(url))
+    const openGraphUrl = html.match(/property="og:url" content="([^"]+)"/)?.[1]
+    assert(openGraphUrl, String(url))
+    assert.equal(new URL(openGraphUrl).href, expectedCanonical)
+    for (const [language, href] of [["es", spanish], ["en", english], ["x-default", spanish]]) {
+      const alternate = html.match(new RegExp(`hrefLang="${language}" href="([^"]+)"`))?.[1]
+      assert(alternate, `Missing alternate in ${url}`)
+      assert.equal(new URL(alternate).href, href)
+    }
     const iconLinks = findIconLinks(html)
     assert.deepEqual(iconLinks.map(({ url }) => url.pathname).sort(), Object.keys(expectedIcons).sort())
     for (const { rel, url: iconUrl } of iconLinks) {
@@ -95,8 +117,9 @@ async function verify() {
     }
     if (route === "/contact") {
       assert(!html.includes("<form"))
-      assert(html.includes("mailto:") && html.includes("https://github.com/omparedes"))
+      assert(html.includes(`href="${contactEmailLink}"`) && html.includes("https://github.com/omparedes"))
     }
+    if (route === "/about") assert(html.includes(`href="${requestResumeLink}"`))
     if (route === "/projects" || route === "/") {
       assert.deepEqual(
         [...html.matchAll(/<article id="project\.([^"]+)"/g)].map(match => match[1]),
@@ -134,11 +157,21 @@ async function verify() {
   scan(sitemap, "sitemap.xml")
   assert.equal((sitemap.match(/<loc>/g) ?? []).length, activeRoutes.length * locales.length)
   assert(!sitemap.includes("/contact/send"))
-  for (const slug of projectSlugs) assert(sitemap.includes(`/projects/${slug}`))
+  assert(!sitemap.includes("/cv-review"))
+  for (const route of activeRoutes) for (const lang of locales) {
+    assert(sitemap.includes(`<loc>${publicOrigin}${route}${lang === "en" ? "?lang=en" : ""}</loc>`))
+  }
   const robotsResponse = await fetch(new URL("/robots.txt", base))
   assert.equal(robotsResponse.status, 200)
   const robots = await robotsResponse.text()
-  assert.match(robots, /Disallow: \//)
+  if (indexable) {
+    assert.match(robots, /^Allow: \/$/m)
+    assert.match(robots, /^Disallow: \/cv-review\/$/m)
+    assert(!/^Disallow: \/$/m.test(robots))
+    assert(robots.includes(`Sitemap: ${publicOrigin}/sitemap.xml`))
+  } else {
+    assert.match(robots, /^Disallow: \/$/m)
+  }
   console.log(`Audited ${builds.length} static text assets, ${media.length} media files, manifests, public files, ${activeRoutes.length * locales.length} HTML responses and ${activeRoutes.length * locales.length} RSC responses.`)
 }
 

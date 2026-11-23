@@ -12,7 +12,7 @@ export const aboutLabels = {
     certificates: "Certificados de cursos", completed: "Finalización", verify: "Verificar certificado",
     index: "En esta página", resume: "Currículum",
     view: "Ver PDF en", download: "Descargar PDF en", resumeLanguages: { es: "español", en: "inglés" },
-    contact: "Contacto profesional", email: "Escribir por correo",
+    contact: "Contacto profesional", email: "Escribir por correo", requestResume: "Solicitar CV",
   },
   en: {
     portrait: "Portrait of",
@@ -27,6 +27,6 @@ export const aboutLabels = {
     certificates: "Course certificates", completed: "Completed", verify: "Verify certificate",
     index: "On this page", resume: "Résumé",
     view: "View PDF in", download: "Download PDF in", resumeLanguages: { es: "Spanish", en: "English" },
-    contact: "Professional contact", email: "Send an email",
+    contact: "Professional contact", email: "Send an email", requestResume: "Request résumé",
   },
 }

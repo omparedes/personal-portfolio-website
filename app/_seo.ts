@@ -5,6 +5,13 @@ import { portfolioContent } from "./_content"
 
 export const siteOrigin = new URL("https://portafolio-plum-xi-81.vercel.app")
 
+export function isIndexableDeployment() {
+  return process.env.NODE_ENV === "production" &&
+    process.env.VERCEL === "1" &&
+    process.env.VERCEL_ENV === "production" &&
+    process.env.VERCEL_TARGET_ENV === "production"
+}
+
 export function canonicalUrl(path: string, locale: Locale) {
   const url = new URL(path, siteOrigin)
   if (locale === "en") url.searchParams.set("lang", "en")
@@ -31,6 +38,7 @@ export function pageMetadata(path: string, locale: Locale, title: string, descri
       siteName: name,
       locale: locale === "es" ? "es_PE" : "en_US",
       alternateLocale: locale === "es" ? "en_US" : "es_PE",
+      images: [{ url: "/profile-photo.jpg", width: 704, height: 704, alt: name }],
     },
     twitter: { card: "summary", title: fullTitle, description },
   }

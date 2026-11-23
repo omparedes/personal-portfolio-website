@@ -1,6 +1,6 @@
 import Image from "next/image"
 import { ArrowUpRight, BookOpen, Code2, Github, GraduationCap, Mail } from "lucide-react"
-import { contactEmailLink, githubProfile } from "@/lib/public-links"
+import { contactEmailLink, githubProfile, requestResumeLink } from "@/lib/public-links"
 import type { ResumeLanguage } from "@/lib/resume-review"
 import { portfolioContent, type PortfolioProject } from "../_content"
 import { labels } from "../_labels"
@@ -119,6 +119,7 @@ export function About({ preferences, resumeDocuments }: {
           <Mail size={22} aria-hidden="true"/><h2 id="contact-title">{t.contact}</h2>
           <div className={s.panelActions}>
             <a href={contactEmailLink}>{t.email}</a>
+            {resumeDocuments.length === 0 && <a href={requestResumeLink}>{t.requestResume}</a>}
             <a href={githubProfile}><Github size={16} aria-hidden="true"/>GitHub</a>
           </div>
         </section>

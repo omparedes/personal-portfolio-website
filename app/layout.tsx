@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 import { headers } from "next/headers"
 import { localeHeader, portfolioLocale } from "./_routes"
-import { siteOrigin } from "./_seo"
+import { isIndexableDeployment, siteOrigin } from "./_seo"
 import './globals.css'
 
 const inter = localFont({
@@ -17,9 +17,11 @@ const jetBrainsMono = localFont({
   variable: "--font-jetbrains-mono",
 })
 
-export const metadata: Metadata = {
-  metadataBase: siteOrigin,
-  robots: { index: false, follow: false },
+export function generateMetadata(): Metadata {
+  return {
+    metadataBase: siteOrigin,
+    robots: isIndexableDeployment() ? { index: true, follow: true } : { index: false, follow: false },
+  }
 }
 
 export default async function RootLayout({
