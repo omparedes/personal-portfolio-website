@@ -1043,6 +1043,242 @@ export const projection = {
         "basis": "code",
         "version": "4.1.9"
       }
+    },
+    {
+      "id": "project.melodycosmetics",
+      "data": {
+        "kind": "project",
+        "name": "MelodyCosmetics",
+        "classification": "professional",
+        "repository": "https://github.com/omparedes/MelodyCosmetics"
+      }
+    },
+    {
+      "id": "detail.melodycosmetics-summary",
+      "data": {
+        "kind": "project-detail",
+        "projectId": "project.melodycosmetics",
+        "area": "summary",
+        "basis": "code"
+      },
+      "text": {
+        "es": "Aplicación interna para encontrar productos, registrar ventas desde el móvil y mantener existencias auditables en un comercio de cosméticos.",
+        "en": "An internal application for finding products, recording sales on mobile, and keeping auditable stock records in a cosmetics shop."
+      }
+    },
+    {
+      "id": "detail.melodycosmetics-context",
+      "data": {
+        "kind": "project-detail",
+        "projectId": "project.melodycosmetics",
+        "area": "context",
+        "basis": "code"
+      },
+      "text": {
+        "es": "En un comercio de cosméticos, la atención en tienda exige consultar precio y disponibilidad mientras se atiende al cliente. La aplicación reúne búsqueda de productos, carrito e inventario para que una venta deje un registro consistente con las existencias.",
+        "en": "Cosmetics sales staff need to check prices and availability while helping customers. The application brings product search, a cart, and inventory together so each recorded sale stays consistent with stock."
+      }
+    },
+    {
+      "id": "participation.melodycosmetics",
+      "data": {
+        "kind": "participation",
+        "profileId": "profile.oscar-paredes",
+        "projectId": "project.melodycosmetics"
+      },
+      "text": {
+        "es": "Contribuí al catálogo comercial, al flujo de venta y al tablero, a la administración de productos y stock, y a la interfaz móvil de promociones. El historial de Git documenta esos cambios bajo mi nombre.",
+        "en": "I contributed to the sales catalog, checkout workflow and dashboard, product and stock administration, and mobile promotion controls. Git records those changes under my name."
+      }
+    },
+    {
+      "id": "detail.melodycosmetics-architecture",
+      "data": {
+        "kind": "project-detail",
+        "projectId": "project.melodycosmetics",
+        "area": "architecture",
+        "basis": "code",
+        "flow": [
+          {
+            "es": "Angular 22",
+            "en": "Angular 22"
+          },
+          {
+            "es": "Supabase Auth y RPC",
+            "en": "Supabase Auth and RPC"
+          },
+          {
+            "es": "PostgreSQL y Storage",
+            "en": "PostgreSQL and Storage"
+          }
+        ]
+      },
+      "text": {
+        "es": "La SPA Angular 22 carga rutas por módulo y mantiene el estado del carrito con Signals. Supabase Auth identifica a los operadores, PostgreSQL aplica acceso por tienda y rol, y Storage conserva las imágenes privadas de productos.",
+        "en": "The Angular 22 SPA lazy-loads feature routes and uses Signals for cart state. Supabase Auth identifies operators, PostgreSQL applies store and role access rules, and Storage holds private product images."
+      }
+    },
+    {
+      "id": "detail.melodycosmetics-sale-flow",
+      "data": {
+        "kind": "project-detail",
+        "projectId": "project.melodycosmetics",
+        "area": "architecture",
+        "basis": "code",
+        "flow": [
+          {
+            "es": "Buscar producto",
+            "en": "Find a product"
+          },
+          {
+            "es": "Añadir al carrito",
+            "en": "Add to cart"
+          },
+          {
+            "es": "Confirmar pago",
+            "en": "Confirm payment"
+          },
+          {
+            "es": "Validar y registrar",
+            "en": "Validate and record"
+          }
+        ]
+      },
+      "text": {
+        "es": "El catálogo ofrece búsqueda y filtros, con controles adaptados a móvil. La venta permite añadir varios artículos, elegir el medio de pago y revisar el resultado. Las promociones pasan por validación del servidor.",
+        "en": "The catalog provides search, filters, and controls adapted to mobile. Checkout supports multiple items, payment selection, and a confirmation summary. Promotions are validated on the server."
+      }
+    },
+    {
+      "id": "detail.melodycosmetics-inventory",
+      "data": {
+        "kind": "project-detail",
+        "projectId": "project.melodycosmetics",
+        "area": "feature",
+        "basis": "code"
+      },
+      "text": {
+        "es": "La administración gestiona productos y una variante interna para los artículos simples. El modelo separa el saldo por variante y ubicación del historial de movimientos. Aperturas, ingresos y ajustes dejan un movimiento asociado.",
+        "en": "Administrators manage products and an internal default variant for simple items. The data model separates stock balances by variant and location from movement history. Opening balances, receipts, and adjustments create movement records."
+      }
+    },
+    {
+      "id": "detail.melodycosmetics-operations",
+      "data": {
+        "kind": "project-detail",
+        "projectId": "project.melodycosmetics",
+        "area": "feature",
+        "basis": "code"
+      },
+      "text": {
+        "es": "El tablero incluye resumen diario de ventas y medios de pago, ventas recientes e indicadores de stock bajo o agotado. El código incluye caja ligera, historial de ventas y exportación administrativa de inventario a Excel.",
+        "en": "The dashboard includes daily sales and payment summaries, recent sales, and low or out-of-stock indicators. The source also includes basic cash tracking, sales history, and an administrative inventory export to Excel."
+      }
+    },
+    {
+      "id": "detail.melodycosmetics-consistency",
+      "data": {
+        "kind": "project-detail",
+        "projectId": "project.melodycosmetics",
+        "area": "decision",
+        "basis": "code"
+      },
+      "text": {
+        "es": "Al registrar una venta, PostgreSQL bloquea los saldos correspondientes, valida existencias y precios, y registra venta, líneas y movimientos en una transacción. Las devoluciones o anulaciones autorizadas se reflejan como movimientos compensatorios. Los roles de administración y venta tienen permisos distintos, incluidos el acceso a costos y la gestión de inventario.",
+        "en": "When recording a sale, PostgreSQL locks the relevant stock balances, validates availability and prices, and records the sale, line items, and movements in one transaction. Authorized returns and voids are reflected as compensating movements. Administrators and sellers have different permissions, including access to costs and stock administration."
+      }
+    },
+    {
+      "id": "detail.melodycosmetics-quality",
+      "data": {
+        "kind": "project-detail",
+        "projectId": "project.melodycosmetics",
+        "area": "quality",
+        "basis": "code"
+      },
+      "text": {
+        "es": "El repositorio versiona pruebas Vitest de carrito, catálogo, ingreso y exportación de inventario, además de pruebas SQL y un guion de concurrencia. GitHub Actions configura comprobaciones de frontend y base de datos. Esta revisión verificó su presencia y alcance en el código.",
+        "en": "The repository includes Vitest checks for cart, catalog, stock intake, and inventory export, along with SQL checks and a concurrency script. GitHub Actions configures frontend and database checks. This review verified their presence and scope in the source."
+      }
+    },
+    {
+      "id": "detail.melodycosmetics-scope",
+      "data": {
+        "kind": "project-detail",
+        "projectId": "project.melodycosmetics",
+        "area": "limitation",
+        "basis": "code"
+      },
+      "text": {
+        "es": "El caso cubre el flujo interno implementado de venta e inventario. La tienda pública, el marketing y las automatizaciones figuran como líneas futuras. La revisión de código no acredita un despliegue activo, un piloto completado ni ventas reales.",
+        "en": "This case covers the implemented internal sales and inventory workflow. A public storefront, marketing, and automation remain future work. The source review does not establish an active deployment, completed pilot, or real sales."
+      }
+    },
+    {
+      "id": "use.melodycosmetics-angular",
+      "data": {
+        "kind": "technology-use",
+        "projectId": "project.melodycosmetics",
+        "technologyId": "technology.angular",
+        "basis": "code",
+        "version": "22.1.2"
+      }
+    },
+    {
+      "id": "use.melodycosmetics-typescript",
+      "data": {
+        "kind": "technology-use",
+        "projectId": "project.melodycosmetics",
+        "technologyId": "technology.typescript",
+        "basis": "code",
+        "version": "6.0.3"
+      }
+    },
+    {
+      "id": "use.melodycosmetics-supabase",
+      "data": {
+        "kind": "technology-use",
+        "projectId": "project.melodycosmetics",
+        "technologyId": "technology.supabase",
+        "basis": "code",
+        "version": "2.112.3"
+      }
+    },
+    {
+      "id": "use.melodycosmetics-postgresql",
+      "data": {
+        "kind": "technology-use",
+        "projectId": "project.melodycosmetics",
+        "technologyId": "technology.postgresql",
+        "basis": "code"
+      }
+    },
+    {
+      "id": "use.melodycosmetics-vitest",
+      "data": {
+        "kind": "technology-use",
+        "projectId": "project.melodycosmetics",
+        "technologyId": "technology.vitest",
+        "basis": "code",
+        "version": "4.1.10"
+      }
+    },
+    {
+      "id": "technology.sheetjs",
+      "data": {
+        "kind": "technology",
+        "name": "SheetJS"
+      }
+    },
+    {
+      "id": "use.melodycosmetics-sheetjs",
+      "data": {
+        "kind": "technology-use",
+        "projectId": "project.melodycosmetics",
+        "technologyId": "technology.sheetjs",
+        "basis": "code",
+        "version": "0.20.3"
+      }
     }
   ],
   "sources": {
@@ -1300,6 +1536,124 @@ export const projection = {
       {
         "href": "https://github.com/omparedes/PCMYM/blob/9fea1e8ca39413226d083da3ca82de73b84a795c/docs/03-ROADMAP-FASES.md",
         "path": "docs/03-ROADMAP-FASES.md"
+      }
+    ],
+    "detail.melodycosmetics-context": [
+      {
+        "href": "https://github.com/omparedes/MelodyCosmetics/blob/e05b8f61f9be45a2ec391650d532b44c0992cc23/apps/inventory-control/docs/PRODUCT_VISION.md",
+        "path": "apps/inventory-control/docs/PRODUCT_VISION.md"
+      },
+      {
+        "href": "https://github.com/omparedes/MelodyCosmetics/blob/e05b8f61f9be45a2ec391650d532b44c0992cc23/apps/inventory-control/README.md",
+        "path": "apps/inventory-control/README.md"
+      }
+    ],
+    "participation.melodycosmetics": [
+      {
+        "href": "https://github.com/omparedes/MelodyCosmetics/commit/47fdf5b2694fd0aa487c690b00ec12d6d29cd7cf",
+        "path": "commit 47fdf5b"
+      },
+      {
+        "href": "https://github.com/omparedes/MelodyCosmetics/commit/829afbb184e4bc3e239ca8b91d3a434fa3a02a7a",
+        "path": "commit 829afbb"
+      },
+      {
+        "href": "https://github.com/omparedes/MelodyCosmetics/commit/f1909aaebeb53e53a6569ad3fbd2e93ecf464d50",
+        "path": "commit f1909aa"
+      },
+      {
+        "href": "https://github.com/omparedes/MelodyCosmetics/commit/5004228a7a8f969fbf97c5f0c4d8b24898bde479",
+        "path": "commit 5004228"
+      }
+    ],
+    "detail.melodycosmetics-architecture": [
+      {
+        "href": "https://github.com/omparedes/MelodyCosmetics/blob/e05b8f61f9be45a2ec391650d532b44c0992cc23/apps/inventory-control/src/app/app.routes.ts",
+        "path": "apps/inventory-control/src/app/app.routes.ts"
+      },
+      {
+        "href": "https://github.com/omparedes/MelodyCosmetics/blob/e05b8f61f9be45a2ec391650d532b44c0992cc23/apps/inventory-control/docs/ARCHITECTURE.md",
+        "path": "apps/inventory-control/docs/ARCHITECTURE.md"
+      }
+    ],
+    "detail.melodycosmetics-sale-flow": [
+      {
+        "href": "https://github.com/omparedes/MelodyCosmetics/blob/e05b8f61f9be45a2ec391650d532b44c0992cc23/apps/inventory-control/src/app/features/catalog/catalog.page.ts",
+        "path": "apps/inventory-control/src/app/features/catalog/catalog.page.ts"
+      },
+      {
+        "href": "https://github.com/omparedes/MelodyCosmetics/blob/e05b8f61f9be45a2ec391650d532b44c0992cc23/apps/inventory-control/src/app/features/sales/sales.page.ts",
+        "path": "apps/inventory-control/src/app/features/sales/sales.page.ts"
+      },
+      {
+        "href": "https://github.com/omparedes/MelodyCosmetics/blob/e05b8f61f9be45a2ec391650d532b44c0992cc23/apps/inventory-control/src/app/features/sales/sales.service.ts",
+        "path": "apps/inventory-control/src/app/features/sales/sales.service.ts"
+      }
+    ],
+    "detail.melodycosmetics-inventory": [
+      {
+        "href": "https://github.com/omparedes/MelodyCosmetics/blob/e05b8f61f9be45a2ec391650d532b44c0992cc23/apps/inventory-control/docs/INVENTORY_MODEL.md",
+        "path": "apps/inventory-control/docs/INVENTORY_MODEL.md"
+      },
+      {
+        "href": "https://github.com/omparedes/MelodyCosmetics/blob/e05b8f61f9be45a2ec391650d532b44c0992cc23/apps/inventory-control/supabase/migrations/202608220001_products_inventory_quick_edit.sql",
+        "path": "apps/inventory-control/supabase/migrations/202608220001_products_inventory_quick_edit.sql"
+      }
+    ],
+    "detail.melodycosmetics-operations": [
+      {
+        "href": "https://github.com/omparedes/MelodyCosmetics/blob/e05b8f61f9be45a2ec391650d532b44c0992cc23/apps/inventory-control/src/app/features/dashboard/dashboard.service.ts",
+        "path": "apps/inventory-control/src/app/features/dashboard/dashboard.service.ts"
+      },
+      {
+        "href": "https://github.com/omparedes/MelodyCosmetics/blob/e05b8f61f9be45a2ec391650d532b44c0992cc23/apps/inventory-control/src/app/features/cash/cash.page.ts",
+        "path": "apps/inventory-control/src/app/features/cash/cash.page.ts"
+      },
+      {
+        "href": "https://github.com/omparedes/MelodyCosmetics/blob/e05b8f61f9be45a2ec391650d532b44c0992cc23/apps/inventory-control/src/app/features/admin/inventory-excel-export.ts",
+        "path": "apps/inventory-control/src/app/features/admin/inventory-excel-export.ts"
+      }
+    ],
+    "detail.melodycosmetics-consistency": [
+      {
+        "href": "https://github.com/omparedes/MelodyCosmetics/blob/e05b8f61f9be45a2ec391650d532b44c0992cc23/apps/inventory-control/supabase/migrations/202608230002_promotion_sales.sql",
+        "path": "apps/inventory-control/supabase/migrations/202608230002_promotion_sales.sql"
+      },
+      {
+        "href": "https://github.com/omparedes/MelodyCosmetics/blob/e05b8f61f9be45a2ec391650d532b44c0992cc23/apps/inventory-control/supabase/migrations/202608200002_commercial_core.sql",
+        "path": "apps/inventory-control/supabase/migrations/202608200002_commercial_core.sql"
+      },
+      {
+        "href": "https://github.com/omparedes/MelodyCosmetics/blob/e05b8f61f9be45a2ec391650d532b44c0992cc23/apps/inventory-control/docs/SECURITY.md",
+        "path": "apps/inventory-control/docs/SECURITY.md"
+      }
+    ],
+    "detail.melodycosmetics-quality": [
+      {
+        "href": "https://github.com/omparedes/MelodyCosmetics/blob/e05b8f61f9be45a2ec391650d532b44c0992cc23/apps/inventory-control/src/app/features/sales/cart.service.spec.ts",
+        "path": "apps/inventory-control/src/app/features/sales/cart.service.spec.ts"
+      },
+      {
+        "href": "https://github.com/omparedes/MelodyCosmetics/blob/e05b8f61f9be45a2ec391650d532b44c0992cc23/apps/inventory-control/supabase/tests/005_promotions.sql",
+        "path": "apps/inventory-control/supabase/tests/005_promotions.sql"
+      },
+      {
+        "href": "https://github.com/omparedes/MelodyCosmetics/blob/e05b8f61f9be45a2ec391650d532b44c0992cc23/apps/inventory-control/scripts/test-inventory-concurrency.mjs",
+        "path": "apps/inventory-control/scripts/test-inventory-concurrency.mjs"
+      },
+      {
+        "href": "https://github.com/omparedes/MelodyCosmetics/blob/e05b8f61f9be45a2ec391650d532b44c0992cc23/.github/workflows/ci.yml",
+        "path": ".github/workflows/ci.yml"
+      }
+    ],
+    "detail.melodycosmetics-scope": [
+      {
+        "href": "https://github.com/omparedes/MelodyCosmetics/blob/e05b8f61f9be45a2ec391650d532b44c0992cc23/README.md",
+        "path": "README.md"
+      },
+      {
+        "href": "https://github.com/omparedes/MelodyCosmetics/blob/e05b8f61f9be45a2ec391650d532b44c0992cc23/apps/inventory-control/docs/ROADMAP.md",
+        "path": "apps/inventory-control/docs/ROADMAP.md"
       }
     ]
   }

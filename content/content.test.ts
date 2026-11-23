@@ -21,7 +21,7 @@ test("localized text and flow labels are present in both locales", () => {
 test("only the approved project selection and credential inventory ship in the review", () => {
   const facts = publicView("es").facts
   assert.deepEqual(facts.filter(fact => fact.data.kind === "project").map(fact => fact.id).sort(), [
-    "project.pcmym", "project.sigcoop", "project.smartparking",
+    "project.melodycosmetics", "project.pcmym", "project.sigcoop", "project.smartparking",
   ])
   const credentials = facts.flatMap(({ data }) => data.kind === "credential" ? [data] : [])
   assert.equal(credentials.length, 9)
@@ -43,7 +43,7 @@ test("case citation keys identify facts and expose only links and paths", () => 
 })
 
 test("case sources, order and architecture are stable across locales", () => {
-  const flows = { "project.sigcoop": [4], "project.smartparking": [4], "project.pcmym": [3, 5] }
+  const flows = { "project.sigcoop": [4], "project.smartparking": [4], "project.pcmym": [3, 5], "project.melodycosmetics": [3, 4] }
   for (const [project, steps] of Object.entries(flows)) {
     const es = publicProjectCase("es", project)
     const en = publicProjectCase("en", project)

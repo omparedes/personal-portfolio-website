@@ -33,4 +33,4 @@ Para la revisión local, establece `PORTFOLIO_CV_REVIEW_DIR` con la ruta absolut
 
 ## Revisión local de proyectos
 
-En la compilación local, el catálogo enlaza los estudios de caso bilingües de SIGCOOP, SmartParking y PCMYM. El portafolio conserva `noindex` durante la revisión.
+En la compilación local, el catálogo enlaza los estudios de caso bilingües de SIGCOOP, SmartParking, PCMYM y MelodyCosmetics. El portafolio conserva `noindex` durante la revisión.

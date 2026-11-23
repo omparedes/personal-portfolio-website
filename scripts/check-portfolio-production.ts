@@ -29,7 +29,8 @@ async function hashes(filenames: string[]) {
   return digests.sort()
 }
 
-const activeRoutes = ["/", "/projects", "/projects/sigcoop", "/projects/smartparking", "/projects/pcmym", "/about", "/contact"]
+const projectSlugs = ["sigcoop", "smartparking", "pcmym", "melodycosmetics"]
+const activeRoutes = ["/", "/projects", ...projectSlugs.map(slug => `/projects/${slug}`), "/about", "/contact"]
 const approvedAssets = ["brand/op-claro.svg", "brand/op-oscuro.svg", "profile-photo.jpg"]
 const expectedIcons = {
   "/apple-icon.png": { rel: "apple-touch-icon", type: /^image\/png/ },
@@ -99,9 +100,9 @@ async function verify() {
     if (route === "/projects" || route === "/") {
       assert.deepEqual(
         [...html.matchAll(/<article id="project\.([^"]+)"/g)].map(match => match[1]),
-        ["sigcoop", "smartparking", "pcmym"],
+        projectSlugs,
       )
-      assert(html.includes('href="/projects/pcmym?'))
+      for (const slug of projectSlugs) assert(html.includes(`href="/projects/${slug}?`))
     }
     assert(!html.includes('href="/cv-review/'), "Local résumé links must stay out of the public configuration")
     assert(!/href="[^"]+\.pdf(?:[?"#]|$)/i.test(html))
@@ -133,7 +134,7 @@ async function verify() {
   scan(sitemap, "sitemap.xml")
   assert.equal((sitemap.match(/<loc>/g) ?? []).length, activeRoutes.length * locales.length)
   assert(!sitemap.includes("/contact/send"))
-  assert(sitemap.includes("/projects/pcmym"))
+  for (const slug of projectSlugs) assert(sitemap.includes(`/projects/${slug}`))
   const robotsResponse = await fetch(new URL("/robots.txt", base))
   assert.equal(robotsResponse.status, 200)
   const robots = await robotsResponse.text()
