@@ -21,7 +21,7 @@ test("localized text and flow labels are present in both locales", () => {
 test("only the approved project selection and credential inventory ship in the review", () => {
   const facts = publicView("es").facts
   assert.deepEqual(facts.filter(fact => fact.data.kind === "project").map(fact => fact.id).sort(), [
-    "project.sigcoop", "project.smartparking",
+    "project.pcmym", "project.sigcoop", "project.smartparking",
   ])
   const credentials = facts.flatMap(({ data }) => data.kind === "credential" ? [data] : [])
   assert.equal(credentials.length, 9)
@@ -35,17 +35,20 @@ test("case citation keys identify facts and expose only links and paths", () => 
     assert(fact && (fact.data.kind === "participation" || fact.data.kind === "project-detail"))
     for (const source of sources) {
       assert.deepEqual(Object.keys(source).sort(), ["href", "path"])
-      assert.match(source.href, /^https:\/\/github\.com\/[^/]+\/[^/]+\/blob\/[0-9a-f]{40}\/.+/)
+      const pinnedPath = /^https:\/\/github\.com\/[^/]+\/[^/]+\/blob\/[0-9a-f]{40}\/.+$/
+      const pinnedCommit = /^https:\/\/github\.com\/[^/]+\/[^/]+\/commit\/[0-9a-f]{40}$/
+      assert(pinnedPath.test(source.href) || (fact.data.kind === "participation" && pinnedCommit.test(source.href)))
     }
   }
 })
 
 test("case sources, order and architecture are stable across locales", () => {
-  for (const project of ["project.sigcoop", "project.smartparking"]) {
+  const flows = { "project.sigcoop": [4], "project.smartparking": [4], "project.pcmym": [3, 5] }
+  for (const [project, steps] of Object.entries(flows)) {
     const es = publicProjectCase("es", project)
     const en = publicProjectCase("en", project)
     const shape = (entries: typeof es) => entries.map(({ id, area, flow, sources }) => ({ id, area, steps: flow?.length, sources }))
-    assert(es.length > 0 && es.some(entry => entry.area === "architecture" && entry.flow?.length === 4))
+    assert.deepEqual(es.flatMap(entry => entry.area === "architecture" && entry.flow ? [entry.flow.length] : []), steps)
     assert.deepEqual(shape(es), shape(en))
   }
 })

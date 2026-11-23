@@ -34,7 +34,7 @@ export function PortfolioHome({ preferences }: { preferences: Preferences }) {
       </section>
       <section className={s.section} id="projects" aria-labelledby="project-heading">
         <div className={s.sectionHeading}><span className={s.sectionIcon}><FolderOpen/></span><h2 id="project-heading">{t.selected}</h2></div>
-        <div className={s.projectGrid}>{projects.slice(0, 2).map(p =>
+        <div className={s.projectGrid}>{projects.map(p =>
           <ProjectCard key={p.id} project={p} preferences={preferences} heading="h3"/>)}</div>
       </section>
       <section id="career" className={s.career} aria-labelledby="career-heading">

@@ -29,7 +29,7 @@ async function hashes(filenames: string[]) {
   return digests.sort()
 }
 
-const activeRoutes = ["/", "/projects", "/projects/sigcoop", "/projects/smartparking", "/about", "/contact"]
+const activeRoutes = ["/", "/projects", "/projects/sigcoop", "/projects/smartparking", "/projects/pcmym", "/about", "/contact"]
 const approvedAssets = ["brand/op-claro.svg", "brand/op-oscuro.svg", "profile-photo.jpg"]
 const expectedIcons = {
   "/apple-icon.png": { rel: "apple-touch-icon", type: /^image\/png/ },
@@ -96,6 +96,13 @@ async function verify() {
       assert(!html.includes("<form"))
       assert(html.includes("mailto:") && html.includes("https://github.com/omparedes"))
     }
+    if (route === "/projects" || route === "/") {
+      assert.deepEqual(
+        [...html.matchAll(/<article id="project\.([^"]+)"/g)].map(match => match[1]),
+        ["sigcoop", "smartparking", "pcmym"],
+      )
+      assert(html.includes('href="/projects/pcmym?'))
+    }
     assert(!html.includes('href="/cv-review/'), "Local résumé links must stay out of the public configuration")
     assert(!/href="[^"]+\.pdf(?:[?"#]|$)/i.test(html))
     const stream = await fetch(url, { headers: { RSC: "1" } })
@@ -126,11 +133,12 @@ async function verify() {
   scan(sitemap, "sitemap.xml")
   assert.equal((sitemap.match(/<loc>/g) ?? []).length, activeRoutes.length * locales.length)
   assert(!sitemap.includes("/contact/send"))
+  assert(sitemap.includes("/projects/pcmym"))
   const robotsResponse = await fetch(new URL("/robots.txt", base))
   assert.equal(robotsResponse.status, 200)
   const robots = await robotsResponse.text()
   assert.match(robots, /Disallow: \//)
-  console.log(`Audited ${builds.length} static text assets, ${media.length} media files, manifests, public files, 12 HTML responses and 12 RSC responses.`)
+  console.log(`Audited ${builds.length} static text assets, ${media.length} media files, manifests, public files, ${activeRoutes.length * locales.length} HTML responses and ${activeRoutes.length * locales.length} RSC responses.`)
 }
 
 verify().catch(error => {

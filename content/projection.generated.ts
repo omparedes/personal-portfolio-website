@@ -779,6 +779,270 @@ export const projection = {
         "es": "Formación universitaria en la UPC",
         "en": "University studies at UPC"
       }
+    },
+    {
+      "id": "project.pcmym",
+      "data": {
+        "kind": "project",
+        "name": "PCMYM",
+        "classification": "professional",
+        "repository": "https://github.com/omparedes/PCMYM"
+      }
+    },
+    {
+      "id": "detail.pcmym-summary",
+      "data": {
+        "kind": "project-detail",
+        "projectId": "project.pcmym",
+        "area": "summary",
+        "basis": "code"
+      },
+      "text": {
+        "es": "Aplicación de taller para seguir equipos y órdenes de servicio desde la recepción hasta la entrega, con repuestos y comprobantes asociados.",
+        "en": "A repair-shop application that tracks devices and service orders from intake to handover, linking spare parts and service documents."
+      }
+    },
+    {
+      "id": "detail.pcmym-context",
+      "data": {
+        "kind": "project-detail",
+        "projectId": "project.pcmym",
+        "area": "context",
+        "basis": "code"
+      },
+      "text": {
+        "es": "El taller recibe computadoras y laptops que pasan por diagnóstico, reparación y entrega. Mantener esas etapas en una misma orden permite consultar lo recibido, el estado del equipo y las acciones pendientes sin reconstruir el historial entre registros separados. Uso este sistema para seguir órdenes en mi actividad de servicio técnico.",
+        "en": "A computer repair shop receives desktops and laptops for diagnosis, repair, and handover. Keeping those stages in one order lets staff see what arrived, where the device is in the process, and what is still pending. I use this system to track orders in my computer repair business."
+      }
+    },
+    {
+      "id": "participation.pcmym",
+      "data": {
+        "kind": "participation",
+        "profileId": "profile.oscar-paredes",
+        "projectId": "project.pcmym"
+      },
+      "text": {
+        "es": "Contribuí al registro de clientes, la máquina de estados de las órdenes, la gestión de repuestos y los registros financieros. Los commits con autoría a mi nombre documentan estos aportes.",
+        "en": "I contributed to customer records, the service-order state machine, spare-parts management, and financial records. The commits authored under my name document these contributions."
+      }
+    },
+    {
+      "id": "detail.pcmym-architecture",
+      "data": {
+        "kind": "project-detail",
+        "projectId": "project.pcmym",
+        "area": "architecture",
+        "basis": "code",
+        "flow": [
+          {
+            "es": "Angular",
+            "en": "Angular"
+          },
+          {
+            "es": "Supabase Auth",
+            "en": "Supabase Auth"
+          },
+          {
+            "es": "PostgreSQL y Storage",
+            "en": "PostgreSQL and Storage"
+          }
+        ]
+      },
+      "text": {
+        "es": "La SPA Angular 22 carga las vistas bajo demanda y consulta Supabase Auth, PostgreSQL y Storage. El modelo enlaza la orden con un cliente, su historial, repuestos, presupuestos, cobros y entrega. Las políticas de acceso separan los registros por negocio.",
+        "en": "The Angular 22 SPA loads views on demand and uses Supabase Auth, PostgreSQL, and Storage. The order links a customer to its status history, parts, estimates, payments, and handover. Access policies separate records by business."
+      }
+    },
+    {
+      "id": "detail.pcmym-lifecycle",
+      "data": {
+        "kind": "project-detail",
+        "projectId": "project.pcmym",
+        "area": "architecture",
+        "basis": "code",
+        "flow": [
+          {
+            "es": "Recepción",
+            "en": "Intake"
+          },
+          {
+            "es": "Diagnóstico",
+            "en": "Diagnosis"
+          },
+          {
+            "es": "Reparación",
+            "en": "Repair"
+          },
+          {
+            "es": "Equipo listo",
+            "en": "Ready for pickup"
+          },
+          {
+            "es": "Entrega",
+            "en": "Handover"
+          }
+        ]
+      },
+      "text": {
+        "es": "El flujo de la orden abarca recepción, diagnóstico, reparación, espera de repuestos cuando corresponde, aviso de equipo listo y entrega. El esquema conserva las transiciones y contempla la cancelación.",
+        "en": "The order moves through intake, diagnosis, repair, parts waiting when required, ready for pickup, and handover. The schema retains transitions and supports cancellation."
+      }
+    },
+    {
+      "id": "detail.pcmym-functions",
+      "data": {
+        "kind": "project-detail",
+        "projectId": "project.pcmym",
+        "area": "feature",
+        "basis": "code"
+      },
+      "text": {
+        "es": "El tablero filtra las órdenes por criterios operativos. Desde una orden se pueden registrar datos del equipo, adjuntar fotos, asignar o devolver repuestos, relacionar presupuestos y registrar abonos. El sistema incluye comprobantes de recepción y entrega.",
+        "en": "The order board supports operational filters. An order can store device details, attach photos, allocate or return parts, link an estimate, and record partial payments. The system includes intake and handover documents."
+      }
+    },
+    {
+      "id": "detail.pcmym-decisions",
+      "data": {
+        "kind": "project-detail",
+        "projectId": "project.pcmym",
+        "area": "decision",
+        "basis": "code"
+      },
+      "text": {
+        "es": "PostgreSQL valida los cambios de estado y las operaciones de inventario. La asignación de repuestos registra un movimiento de stock y rechaza cantidades que dejarían existencias negativas. Las fotos se consultan mediante enlaces firmados.",
+        "en": "PostgreSQL validates order transitions and inventory operations. Parts allocation records a stock movement and rejects quantities that would make stock negative. Equipment photos are retrieved through signed links."
+      }
+    },
+    {
+      "id": "detail.pcmym-quality",
+      "data": {
+        "kind": "project-detail",
+        "projectId": "project.pcmym",
+        "area": "quality",
+        "basis": "code"
+      },
+      "text": {
+        "es": "El repositorio incluye pruebas Vitest para reglas de estado, documentos e inventario y scripts SQL para reglas de negocio. Esta revisión verificó su presencia y alcance en el código.",
+        "en": "The repository includes Vitest checks for state rules, documents, and inventory, plus SQL checks for business rules. This review verified their presence and scope in the source."
+      }
+    },
+    {
+      "id": "detail.pcmym-result",
+      "data": {
+        "kind": "project-detail",
+        "projectId": "project.pcmym",
+        "area": "result",
+        "basis": "code"
+      },
+      "text": {
+        "es": "El resultado verificable es la trazabilidad entre una orden, sus transiciones, los movimientos de repuestos y los comprobantes. Las fuentes permiten comprobar cómo se relacionan estos elementos en el modelo.",
+        "en": "The verifiable result is traceability between an order, its transitions, parts movements, and the service documents. The sources show how these elements are linked in the model."
+      }
+    },
+    {
+      "id": "detail.pcmym-scope",
+      "data": {
+        "kind": "project-detail",
+        "projectId": "project.pcmym",
+        "area": "limitation",
+        "basis": "code"
+      },
+      "text": {
+        "es": "El MVP cubre la operación de taller documentada. La incorporación de otros negocios y las integraciones externas requieren validación adicional. Está pendiente una demostración con datos sintéticos.",
+        "en": "The MVP covers the documented workshop workflow. Onboarding other shops and external integrations require further validation. A demonstration with synthetic data is pending."
+      }
+    },
+    {
+      "id": "use.pcmym-angular",
+      "data": {
+        "kind": "technology-use",
+        "projectId": "project.pcmym",
+        "technologyId": "technology.angular",
+        "basis": "code",
+        "version": "22.0.2"
+      }
+    },
+    {
+      "id": "use.pcmym-typescript",
+      "data": {
+        "kind": "technology-use",
+        "projectId": "project.pcmym",
+        "technologyId": "technology.typescript",
+        "basis": "code",
+        "version": "6.0.3"
+      }
+    },
+    {
+      "id": "use.pcmym-postgresql",
+      "data": {
+        "kind": "technology-use",
+        "projectId": "project.pcmym",
+        "technologyId": "technology.postgresql",
+        "basis": "code"
+      }
+    },
+    {
+      "id": "use.pcmym-supabase",
+      "data": {
+        "kind": "technology-use",
+        "projectId": "project.pcmym",
+        "technologyId": "technology.supabase",
+        "basis": "code",
+        "version": "2.108.2"
+      }
+    },
+    {
+      "id": "technology.primeng",
+      "data": {
+        "kind": "technology",
+        "name": "PrimeNG"
+      }
+    },
+    {
+      "id": "use.pcmym-primeng",
+      "data": {
+        "kind": "technology-use",
+        "projectId": "project.pcmym",
+        "technologyId": "technology.primeng",
+        "basis": "code",
+        "version": "21.1.9"
+      }
+    },
+    {
+      "id": "technology.tailwind-css",
+      "data": {
+        "kind": "technology",
+        "name": "Tailwind CSS"
+      }
+    },
+    {
+      "id": "use.pcmym-tailwind-css",
+      "data": {
+        "kind": "technology-use",
+        "projectId": "project.pcmym",
+        "technologyId": "technology.tailwind-css",
+        "basis": "code",
+        "version": "4.3.1"
+      }
+    },
+    {
+      "id": "technology.vitest",
+      "data": {
+        "kind": "technology",
+        "name": "Vitest"
+      }
+    },
+    {
+      "id": "use.pcmym-vitest",
+      "data": {
+        "kind": "technology-use",
+        "projectId": "project.pcmym",
+        "technologyId": "technology.vitest",
+        "basis": "code",
+        "version": "4.1.9"
+      }
     }
   ],
   "sources": {
@@ -938,6 +1202,104 @@ export const projection = {
       {
         "href": "https://github.com/omparedes/ParkingApp2/blob/bf1b0d03b720c81248629bd3206ac944ddd127ff/README_TESIS.md",
         "path": "README_TESIS.md"
+      }
+    ],
+    "detail.pcmym-context": [
+      {
+        "href": "https://github.com/omparedes/PCMYM/blob/9fea1e8ca39413226d083da3ca82de73b84a795c/supabase/migrations/20260619174148_create_service_orders.sql",
+        "path": "supabase/migrations/20260619174148_create_service_orders.sql"
+      }
+    ],
+    "participation.pcmym": [
+      {
+        "href": "https://github.com/omparedes/PCMYM/commit/f2417dfe340b98ab0fe94aa1228b4820b601cc3e",
+        "path": "commit f2417df"
+      },
+      {
+        "href": "https://github.com/omparedes/PCMYM/commit/3b51c4197a254c0655d780cbf4bfdc5ef85cdeff",
+        "path": "commit 3b51c41"
+      },
+      {
+        "href": "https://github.com/omparedes/PCMYM/commit/e1daf2fa023ec049ce168d38e23ecb79cc17e658",
+        "path": "commit e1daf2f"
+      },
+      {
+        "href": "https://github.com/omparedes/PCMYM/commit/44924a5ebe0020971ab2d04aab5e9568df191310",
+        "path": "commit 44924a5"
+      }
+    ],
+    "detail.pcmym-architecture": [
+      {
+        "href": "https://github.com/omparedes/PCMYM/blob/9fea1e8ca39413226d083da3ca82de73b84a795c/docs/01-ARQUITECTURA.md",
+        "path": "docs/01-ARQUITECTURA.md"
+      },
+      {
+        "href": "https://github.com/omparedes/PCMYM/blob/9fea1e8ca39413226d083da3ca82de73b84a795c/apps/crm/src/app/app.routes.ts",
+        "path": "apps/crm/src/app/app.routes.ts"
+      },
+      {
+        "href": "https://github.com/omparedes/PCMYM/blob/9fea1e8ca39413226d083da3ca82de73b84a795c/docs/02-MODELO-DATOS.md",
+        "path": "docs/02-MODELO-DATOS.md"
+      }
+    ],
+    "detail.pcmym-lifecycle": [
+      {
+        "href": "https://github.com/omparedes/PCMYM/blob/9fea1e8ca39413226d083da3ca82de73b84a795c/apps/crm/src/app/features/service-orders/service-orders.models.ts",
+        "path": "apps/crm/src/app/features/service-orders/service-orders.models.ts"
+      },
+      {
+        "href": "https://github.com/omparedes/PCMYM/blob/9fea1e8ca39413226d083da3ca82de73b84a795c/supabase/migrations/20260906140000_add_service_order_delivery.sql",
+        "path": "supabase/migrations/20260906140000_add_service_order_delivery.sql"
+      }
+    ],
+    "detail.pcmym-functions": [
+      {
+        "href": "https://github.com/omparedes/PCMYM/blob/9fea1e8ca39413226d083da3ca82de73b84a795c/apps/crm/src/app/features/service-orders/service-orders-board.ts",
+        "path": "apps/crm/src/app/features/service-orders/service-orders-board.ts"
+      },
+      {
+        "href": "https://github.com/omparedes/PCMYM/blob/9fea1e8ca39413226d083da3ca82de73b84a795c/apps/crm/src/app/features/service-orders/service-order-documents.service.ts",
+        "path": "apps/crm/src/app/features/service-orders/service-order-documents.service.ts"
+      }
+    ],
+    "detail.pcmym-decisions": [
+      {
+        "href": "https://github.com/omparedes/PCMYM/blob/9fea1e8ca39413226d083da3ca82de73b84a795c/supabase/migrations/20260906080000_create_inventory_and_parts.sql",
+        "path": "supabase/migrations/20260906080000_create_inventory_and_parts.sql"
+      },
+      {
+        "href": "https://github.com/omparedes/PCMYM/blob/9fea1e8ca39413226d083da3ca82de73b84a795c/supabase/migrations/20260619200406_create_service_order_photos.sql",
+        "path": "supabase/migrations/20260619200406_create_service_order_photos.sql"
+      }
+    ],
+    "detail.pcmym-quality": [
+      {
+        "href": "https://github.com/omparedes/PCMYM/blob/9fea1e8ca39413226d083da3ca82de73b84a795c/apps/crm/src/app/features/service-orders/service-orders.models.spec.ts",
+        "path": "apps/crm/src/app/features/service-orders/service-orders.models.spec.ts"
+      },
+      {
+        "href": "https://github.com/omparedes/PCMYM/blob/9fea1e8ca39413226d083da3ca82de73b84a795c/apps/crm/src/app/features/service-orders/service-order-documents.spec.ts",
+        "path": "apps/crm/src/app/features/service-orders/service-order-documents.spec.ts"
+      },
+      {
+        "href": "https://github.com/omparedes/PCMYM/blob/9fea1e8ca39413226d083da3ca82de73b84a795c/apps/crm/src/app/features/inventory/inventory.spec.ts",
+        "path": "apps/crm/src/app/features/inventory/inventory.spec.ts"
+      }
+    ],
+    "detail.pcmym-result": [
+      {
+        "href": "https://github.com/omparedes/PCMYM/blob/9fea1e8ca39413226d083da3ca82de73b84a795c/supabase/migrations/20260906080000_create_inventory_and_parts.sql",
+        "path": "supabase/migrations/20260906080000_create_inventory_and_parts.sql"
+      },
+      {
+        "href": "https://github.com/omparedes/PCMYM/blob/9fea1e8ca39413226d083da3ca82de73b84a795c/supabase/migrations/20260906140000_add_service_order_delivery.sql",
+        "path": "supabase/migrations/20260906140000_add_service_order_delivery.sql"
+      }
+    ],
+    "detail.pcmym-scope": [
+      {
+        "href": "https://github.com/omparedes/PCMYM/blob/9fea1e8ca39413226d083da3ca82de73b84a795c/docs/03-ROADMAP-FASES.md",
+        "path": "docs/03-ROADMAP-FASES.md"
       }
     ]
   }

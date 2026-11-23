@@ -6,6 +6,8 @@ type Specialty = "frontend" | "server" | "data" | "cloud" | "ai"
 // Map approved technology relations to navigational topics, not proficiency claims.
 export const specialtyByTechnology: Partial<Record<string, readonly Specialty[]>> = {
   "technology.angular": ["frontend"],
+  "technology.primeng": ["frontend"],
+  "technology.tailwind-css": ["frontend"],
   "technology.supabase": ["server", "data"],
   "technology.postgresql": ["data"],
   "technology.cloudflare-pages": ["cloud"],

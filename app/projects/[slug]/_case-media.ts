@@ -5,11 +5,12 @@ import report from "../../_assets/reporte-contable-demo.webp"
 import dashboardThumbnail from "../../_assets/dashboard-demo-480.webp"
 import paymentThumbnail from "../../_assets/registro-pagos-demo-480.webp"
 import reportThumbnail from "../../_assets/reporte-contable-demo-480.webp"
+import type { PortfolioProject } from "../../_content"
 import { labels } from "../../_labels"
 import { caseLabels } from "./_case-labels"
 import type { GalleryImage } from "./_gallery"
 
-export function demoImages(locale: Locale): GalleryImage[] {
+function sigcoopImages(locale: Locale): GalleryImage[] {
   const t = labels[locale]
   const copy = caseLabels[locale]
   return [
@@ -17,4 +18,12 @@ export function demoImages(locale: Locale): GalleryImage[] {
     { full: payment, thumbnail: paymentThumbnail, title: copy.payments, alt: copy.paymentsAlt, caption: copy.paymentsCaption },
     { full: report, thumbnail: reportThumbnail, title: t.report, alt: t.reportAlt, caption: copy.reportCaption },
   ]
+}
+
+const galleries: Partial<Record<string, (project: PortfolioProject, locale: Locale) => GalleryImage[]>> = {
+  sigcoop: (project, locale) => project.demo ? sigcoopImages(locale) : [],
+}
+
+export function caseImages(project: PortfolioProject, locale: Locale): GalleryImage[] {
+  return galleries[project.slug]?.(project, locale) ?? []
 }

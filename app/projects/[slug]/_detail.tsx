@@ -9,7 +9,7 @@ import { PortfolioShell } from "../../_shell"
 import preview from "../../preview.module.css"
 import { filterProjects } from "../_filters"
 import { caseLabels } from "./_case-labels"
-import { demoImages } from "./_case-media"
+import { caseImages } from "./_case-media"
 import { Gallery } from "./_gallery"
 import s from "./case.module.css"
 
@@ -63,7 +63,7 @@ export function ProjectDetail({ slug, preferences, params }: {
   const sections = sectionOrder.map(area => ({ area, entries: entries.filter(entry => entry.area === area) }))
     .filter(section => section.entries.length)
   const sources = sourceList(entries)
-  const gallery = project.slug === "sigcoop" && project.demo ? demoImages(locale) : []
+  const gallery = caseImages(project, locale)
   const tech = project.technologies.length > 0
 
   return <PortfolioShell preferences={preferences} name={name} path={`${projectsPath}/${slug}`} query={query} catalogQuery={query}>
